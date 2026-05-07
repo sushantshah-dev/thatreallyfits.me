@@ -1,4 +1,4 @@
-# {{APP_NAME}}
+# that-really-fits-me
 
 This is the short entry point for the repository.
 

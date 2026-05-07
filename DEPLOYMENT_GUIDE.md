@@ -1,13 +1,13 @@
-# {{APP_NAME}}
+# that-really-fits-me
 
 Template for a small Flask app with PostgreSQL, tests, Docker, and automated VPS deployment.
 
 ## Project details
 
-- App name: {{APP_NAME}}
-- VPS host: {{VPS_HOST}}
-- Deployment mode: {{DEPLOY_MODE}}
-- Public endpoint: {{PUBLIC_ENDPOINT}}
+- App name: that-really-fits-me
+- VPS host: 64.227.152.245
+- Deployment mode: domain
+- Public endpoint: http://thatreallyfits.me
 
 ## What’s included
 
@@ -157,8 +157,8 @@ systemctl enable --now docker nginx
 Create a project directory for this app:
 
 ```bash
-mkdir -p /opt/{{APP_NAME}}
-chmod 755 /opt/{{APP_NAME}}
+mkdir -p /opt/that-really-fits-me
+chmod 755 /opt/that-really-fits-me
 ```
 
 ### SSH key setup
@@ -214,10 +214,10 @@ Each push to `main`:
 1. Runs tests in CI.
 2. Builds and pushes the image to GHCR.
 3. Connects to the VPS.
-4. Uploads `deploy/vps/docker-compose.vps.yml` to `/opt/{{APP_NAME}}/`.
+4. Uploads `deploy/vps/docker-compose.vps.yml` to `/opt/that-really-fits-me/`.
 5. Renders `deploy/vps/nginx/site.conf.template` using the chosen host port and public port.
 6. Pulls the new image and restarts the stack.
-7. Installs the nginx config into `/etc/nginx/conf.d/{{APP_NAME}}.conf` and reloads nginx.
+7. Installs the nginx config into `/etc/nginx/conf.d/that-really-fits-me.conf` and reloads nginx.
 
 ## Multiple apps on one VPS
 
