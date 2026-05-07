@@ -1,0 +1,39 @@
+{
+  "name": "thatreallyfits.me",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Flask app with a React frontend served from Flask static assets.",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sushantshah-dev/thatreallyfits.me.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sushantshah-dev/thatreallyfits.me/issues"
+  },
+  "homepage": "https://github.com/sushantshah-dev/thatreallyfits.me#readme",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "framer-motion": "^10.12.0",
+    "clsx": "^1.2.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
+    "autoprefixer": "^10.5.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "postcss": "^8.5.14",
+    "vite": "^5.4.10"
+  }
+}

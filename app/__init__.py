@@ -4,7 +4,8 @@ from flask import Flask
 
 from app.config import CONFIG_BY_NAME
 from app.extensions import db, migrate
-from app.routes import health_bp
+from app.routes import health_bp, home_bp
+from app.vite import register_vite_helpers
 
 
 def create_app(config_name: str | None = None) -> Flask:
@@ -20,7 +21,9 @@ def create_app(config_name: str | None = None) -> Flask:
 
     db.init_app(app)
     migrate.init_app(app, db)
+    register_vite_helpers(app)
 
+    app.register_blueprint(home_bp)
     app.register_blueprint(health_bp)
 
     return app
