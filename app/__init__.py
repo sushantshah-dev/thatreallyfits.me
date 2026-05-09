@@ -1,10 +1,12 @@
 import os
 
-from flask import Flask
+import jwt
+from flask import Flask, g, request
 
 from app.config import CONFIG_BY_NAME
 from app.extensions import db, migrate
-from app.routes import health_bp, home_bp
+from app.models import *  # noqa: F401, F403
+from app.routes import app_bp, auth_bp, health_bp, home_bp
 from app.vite import register_vite_helpers
 
 
@@ -24,6 +26,45 @@ def create_app(config_name: str | None = None) -> Flask:
     register_vite_helpers(app)
 
     app.register_blueprint(home_bp)
+    app.register_blueprint(app_bp)
+    app.register_blueprint(auth_bp)
     app.register_blueprint(health_bp)
+
+    @app.before_request
+    def load_current_user():
+        g.current_user = None
+
+        token = None
+
+        auth_header = request.headers.get("Authorization", "")
+        if auth_header.startswith("Bearer "):
+            token = auth_header.removeprefix("Bearer ").strip()
+
+        if token is None:
+            token = request.cookies.get("auth_token")
+
+        if not token:
+            return None
+
+        try:
+            payload = jwt.decode(
+                token,
+                app.config["SECRET_KEY"],
+                algorithms=["HS256"],
+            )
+        except jwt.ExpiredSignatureError:
+            return None
+        except jwt.InvalidTokenError:
+            return None
+
+        user_id = payload.get("user_id")
+        if user_id is None:
+            return None
+
+        from app.models import User
+
+        user = User.query.get(user_id)
+        g.current_user = user
+        return None
 
     return app
