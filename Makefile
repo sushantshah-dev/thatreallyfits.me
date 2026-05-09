@@ -21,12 +21,12 @@ run:
 	python manage.py
 
 migrate-init:
-	flask db init
-	flask db migrate -m "initial schema"
-	flask db upgrade
+	python -m flask db init
+	python -m flask db migrate -m "initial schema"
+	python -m flask db upgrade
 
 migrate-upgrade:
-	flask db upgrade
+	python -m flask db upgrade
 
 docker-up:
 	docker compose up --build -d
