@@ -101,6 +101,7 @@ jobs:
           FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
           GHCR_USERNAME: ${{ secrets.GHCR_USERNAME }}
           GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           printf '%s\n' \
             "POSTGRES_USER=${POSTGRES_USER}" \
@@ -110,6 +111,7 @@ jobs:
             "PUBLIC_PORT=${PUBLIC_PORT}" \
             "SERVER_NAME=${SERVER_NAME}" \
             "FLASK_SECRET_KEY=${FLASK_SECRET_KEY}" \
+            "OPENROUTER_API_KEY=${OPENROUTER_API_KEY}" \
             "IMAGE=${IMAGE_URI}" > .vps.env
 
           scp -P "${VPS_PORT:-22}" .vps.env "$VPS_USER@$VPS_HOST:${APP_DIR}/.env"
