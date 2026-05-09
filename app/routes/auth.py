@@ -2,8 +2,8 @@ import datetime
 import os
 
 import jwt
-from flask import Blueprint, current_app, make_response, redirect, request, url_for
 import sqlalchemy.exc
+from flask import Blueprint, current_app, make_response, redirect, request, url_for
 
 from app.extensions import db
 from app.models import User
