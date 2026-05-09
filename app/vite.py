@@ -6,7 +6,6 @@ from pathlib import Path
 
 from flask import Flask, current_app, url_for
 
-
 MANIFEST_PATH = Path("static/react/.vite/manifest.json")
 
 
