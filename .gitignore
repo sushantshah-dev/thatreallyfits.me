@@ -12,3 +12,4 @@ migrations/
 .DS_Store
 
 node_modules/
+app/static/react/
