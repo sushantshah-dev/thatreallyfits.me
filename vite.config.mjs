@@ -19,5 +19,12 @@ export default defineConfig({
     outDir: '../app/static/react',
     emptyOutDir: true,
     manifest: true,
+    rollupOptions: {
+      input: {
+        index: path.resolve(__dirname, 'frontend/index.html'),
+        app: path.resolve(__dirname, 'frontend/app.html'),
+        auth: path.resolve(__dirname, 'frontend/auth.html'),
+      },
+    },
   },
 });

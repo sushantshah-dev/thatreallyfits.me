@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+
 const quickPrompts = [
   'Best bike for 15KM daily commute. I save around 6k per month after expenses.',
   'Camera for travel and low light. I am looking to start vlogging my hikes.',
@@ -22,7 +27,7 @@ const highlights = [
   },
 ];
 
-function App() {
+function Landing() {
   const [prompt, setPrompt] = useState('');
   const [promptPulse, setPromptPulse] = useState(0);
 
@@ -46,12 +51,13 @@ function App() {
           <a className="text-xs font-medium uppercase tracking-[0.18em] text-white/80 sm:text-sm" href="#hero">
             ThatReallyFits.me
           </a>
-          <button
-            type="button"
-            className="rounded-full border border-white/12 bg-white/5 px-3 py-2 text-xs font-medium text-white/85 backdrop-blur-xl transition hover:bg-white/10 sm:px-4 sm:text-sm"
-          >
-            Open app
-          </button>
+          <Button asChild variant="secondary" size="sm">
+            <a
+            href="/app"
+            >
+              Open app
+            </a>
+          </Button>
         </header>
 
         <div
@@ -65,9 +71,9 @@ function App() {
               transition={{ duration: 0.7, ease: 'easeOut' }}
               className="order-2 space-y-6 sm:space-y-8 lg:order-1"
             >
-              <div className="inline-flex rounded-full border border-white/12 bg-white/5 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-white/75 backdrop-blur-xl sm:text-xs">
+              <Badge>
                 Shopping decisions, made clearer
-              </div>
+              </Badge>
               <div className="space-y-5">
                 <h1 className="max-w-[12ch] text-balance text-4xl font-semibold tracking-[-0.06em] text-white sm:text-5xl lg:text-7xl">
                   Compare what fits, save what matters.
@@ -97,13 +103,15 @@ function App() {
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.08 }}
               className="order-1 w-full lg:order-2"
             >
-              <form className="w-full overflow-hidden rounded-[28px] border border-white/12 bg-white/6 p-5 shadow-[0_24px_90px_rgba(0,0,0,0.35)] backdrop-blur-2xl sm:rounded-[32px] sm:p-6">
-                <div className="flex flex-col gap-2 sm:gap-4">
+              <Card>
+                <CardHeader className="border-b-0 px-5 pb-0 pt-5 sm:px-6 sm:pt-6">
                   <div className="flex flex-col gap-1 text-[10px] uppercase tracking-[0.18em] text-white/55 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:text-xs">
                     <span>Search</span>
                     <span className="hidden sm:flex" >Press enter to compare</span>
                   </div>
+                </CardHeader>
 
+                <CardContent className="space-y-4 px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
                   <motion.label
                     key={promptPulse}
                     className="block"
@@ -112,42 +120,45 @@ function App() {
                     transition={{ duration: 0.28, ease: 'easeOut' }}
                   >
                     <span className="sr-only">Ask a question</span>
-                    <textarea
+                    <Textarea
                       rows={3}
                       aria-label="Ask a question"
                       value={prompt}
                       onChange={(event) => setPrompt(event.target.value)}
                       placeholder="Best bike under ₹3L for daily commuting and weekend rides"
-                      className="w-full resize-none border-0 bg-transparent text-sm leading-6 text-white outline-none placeholder:text-white/35 sm:text-[17px] sm:text-lg"
+                      className="text-sm sm:text-[17px] sm:text-lg"
                     />
                   </motion.label>
 
                   <div className="flex min-w-0 flex-col gap-2 border-t border-white/10 pt-3 sm:gap-3 sm:pt-4 lg:flex-row lg:items-center lg:justify-between">
                     <div className="grid min-w-0 gap-2 sm:flex sm:flex-wrap">
                       {quickPrompts.map((chipPrompt) => (
-                        <button
+                        <Button
                           type="button"
                           key={chipPrompt}
                           onClick={() => {
                             setPrompt(chipPrompt);
                             setPromptPulse((value) => value + 1);
                           }}
-                          className="max-w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-3 py-2 text-left text-xs text-white/75 transition hover:bg-white/10 sm:text-center sm:text-sm"
+                          variant="secondary"
+                          size="sm"
+                          className="max-w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap sm:text-center"
                         >
                           {chipPrompt}
-                        </button>
+                        </Button>
                       ))}
                     </div>
 
-                    <button
+                    <Button
                       type="submit"
-                      className="inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200 sm:px-6 lg:self-auto"
+                      size="lg"
+                      className="shrink-0 lg:self-auto"
                     >
                       Find fit
-                    </button>
+                    </Button>
                   </div>
-                </div>
-              </form>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </div>
@@ -179,4 +190,4 @@ function App() {
   );
 }
 
-export default App;
+export default Landing;
